@@ -1,0 +1,16 @@
+# If you want electrum to appear in a linux app launcher ("start menu"), install this by doing:
+# sudo desktop-file-install electrum.desktop
+
+[Desktop Entry]
+Comment=Lightweight Rubycoin Client
+Exec=electrum-rby %u
+GenericName[en_US]=Rubycoin Wallet
+GenericName=Rubycoin Wallet
+Icon=electrum-rby
+Name[en_US]=Electrum Rubycoin Wallet
+Name=Electrum Rubycoin Wallet
+Categories=Finance;Network;
+StartupNotify=false
+Terminal=false
+Type=Application
+MimeType=x-scheme-handler/rubycoin;
