@@ -60,16 +60,14 @@ TESTNET = False
 ADDRTYPE_P2PKH = 60
 ADDRTYPE_P2SH = 85
 ADDRTYPE_P2SH_ALT = 5
-HEADERS_URL = "" #"http://localhost/blockchain_headers"
+HEADERS_URL = ""
 GENESIS = "00000760e24f1ad47f7a6e912bc9ed2b9ce013fc85ba217da8b079762f6b0058"
-#SERVERLIST = 'servers.json'
+
 DEFAULT_PORTS = {'t': '5018', 's':'5018'}
-#DEFAULT_SERVERS = read_json_dict('servers.json')
 
 DEFAULT_SERVERS =     {
-                        #'rby-cce-1.coinomi.net': DEFAULT_PORTS,
-                        #'rby-cce-2.coinomi.net': DEFAULT_PORTS,
-                        '192.168.1.106': {'t': '50011', 's': '50011'}
+                        'rby-cce-1.coinomi.net': DEFAULT_PORTS,
+                        'rby-cce-2.coinomi.net': DEFAULT_PORTS
                     }
 
 

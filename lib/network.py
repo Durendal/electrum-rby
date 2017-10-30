@@ -50,8 +50,7 @@ DEFAULT_PORTS = {'t':'5018', 's':'5019'}
 
 DEFAULT_SERVERS = {
     'rby-cce-1.coinomi.net': DEFAULT_PORTS,
-    'rby-cce-2.coinomi.net': DEFAULT_PORTS,
-    '192.168.1.106': {'t': '50011', 's':'50011'}
+    'rby-cce-2.coinomi.net': DEFAULT_PORTS
 }
 
 def set_testnet():
