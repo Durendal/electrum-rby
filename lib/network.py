@@ -510,8 +510,7 @@ class Network(util.DaemonThread):
         result = response.get('result')
         method = response.get('method')
         params = response.get('params')
-        #self.print_error("[DEBUGGING] process_response method:", method)
-        #self.print_error("\t[DEBUGGING] process_response params:", params)
+
         # We handle some responses; return the rest to the client.
         if method == 'server.version':
             interface.server_version = result
@@ -731,19 +730,19 @@ class Network(util.DaemonThread):
         if self.bc_requests:
             req_if, data = self.bc_requests[0]
             req_idx = int(data.get('chunk_idx'))
-            #self.print_error("[DEBUGGING] req_idx:", req_idx)
+
             # Ignore unsolicited chunks
             if req_if == interface and req_idx == int(response['params'][0]):
                 idx = self.blockchain().connect_chunk(req_idx, response['result'])
                 # If not finished, get the next chunk
-                #self.print_error("[DEBUGGING] connect_chunk executed")
+
                 if idx < 0 or self.get_local_height() >= data['if_height']:
-                    #self.print_error("[DEBUGGING] downloading additional block headers")
+
                     self.bc_requests.popleft()
                     self.notify('updated')
                 else:
                     self.request_chunk(interface, data, idx)
-        #self.print_error("[DEBUGGING] on_get_chunk: beginning v3.0 instructions")
+
         error = response.get('error')
         result = response.get('result')
         params = response.get('params')
@@ -1101,12 +1100,12 @@ class Network(util.DaemonThread):
         '''Work through each interface that has notified us of a new header.
         Send it requests if it is ahead of our blockchain object.
         '''
-        #self.print_error("[DEBUGGING] handle_bc_requests entering handle_bc_requests")
+
         while self.bc_requests:
             interface, data = self.bc_requests.popleft()
             # If the connection was lost move on
             if not interface in list(self.interfaces.values()):
-                #self.print_error("[DEBUGGING] handle_bc_requests skipping interface:", interface)
+
                 continue
             req_time = data.get('req_time')
             if not req_time:
@@ -1143,7 +1142,6 @@ class Network(util.DaemonThread):
 
     def on_header(self, i, header):
         height = header.get('block_height')
-        #self.print_error("[DEBUGGING] on_header height:", height)
         if not height:
             return
         self.heights[i.server] = height

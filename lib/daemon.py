@@ -208,36 +208,30 @@ class Daemon(DaemonThread):
     def load_wallet(self, path, password):
         # wizard will be launched if we return
         if path in self.wallets:
-            self.print_error("[DEBUGGING] Located wallet:", path, "in self.wallets")
+
             wallet = self.wallets[path]
             return wallet
-        self.print_error("[DEBUGGING] Attempting to create wallet:", path)
+
         storage = WalletStorage(path, manual_upgrades=True)
-        self.print_error("[DEBUGGING] wallet loaded successfully")
+
         if not storage.file_exists():
-            self.print_error("[DEBUGGING] Wallet:", path, "does not exist.")
+
             return
         if storage.is_encrypted():
-            self.print_error("[DEBUGGING] Decrypting wallet:", path)
+
             if not password:
                 return
             storage.decrypt(password)
         if storage.requires_split():
-            self.print_error("[DEBUGGING] wallet:", path, " something about splits")
             return
         if storage.requires_upgrade():
-            self.print_error("[DEBUGGING] wallet:", path, "requires update")
             storage.upgrade()
         if storage.get_action():
-            self.print_error("[DEBUGGING] wallet:", path, "get action?")
             return
-        self.print_error("[DEBUGGING] attempting to create wallet...")
+        
         wallet = Wallet(storage)
-        self.print_error("[DEBUGGING] attempting start wallet threads...")
         wallet.start_threads(self.network)
-        self.print_error("[DEBUGGING] adding wallet...")
         self.wallets[path] = wallet
-        self.print_error("[DEBUGGING] Created wallet:", path, "returning...")
         return wallet
 
     def add_wallet(self, wallet):
