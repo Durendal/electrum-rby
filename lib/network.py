@@ -743,31 +743,6 @@ class Network(util.DaemonThread):
                 else:
                     self.request_chunk(interface, data, idx)
 
-        error = response.get('error')
-        result = response.get('result')
-        params = response.get('params')
-        if result is None or params is None or error is not None:
-            interface.print_error(error or 'bad response')
-            return
-        # Ignore unsolicited chunks
-        index = params[0]
-        if interface.request != index:
-            return
-        #if interface.blockchain is not None:
-        connect = interface.blockchain.connect_chunk(index, result) if interface.blockchain else None
-        # If not finished, get the next chunk
-        if not connect:
-            self.connection_down(interface.server)
-            return
-        if interface.blockchain is not None and interface.blockchain.height() < interface.tip:
-            self.request_chunk(interface, index+1)
-        else:
-            interface.request = None
-            interface.mode = 'default'
-            interface.print_error('catch up done', interface.blockchain.height())
-            interface.blockchain.catch_up = None
-        self.notify('updated')
-
     def request_header(self, interface, data, height):
         #interface.print_error("requesting header %d" % height)
         self.queue_request('blockchain.block.get_header', [height], interface)
