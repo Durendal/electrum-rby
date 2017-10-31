@@ -1,5 +1,6 @@
 {
     "CoinID": [
+        "USD",
         "AUD",
         "BGN",
         "BRL",
@@ -30,7 +31,6 @@
         "SGD",
         "THB",
         "TRY",
-        "USD",
         "ZAR"
     ]
 }
