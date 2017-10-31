@@ -782,7 +782,7 @@ class Transaction:
             if type == TYPE_ADDRESS:
                 addr = x
             elif type == TYPE_PUBKEY:
-                addr = public_key_to_bc_address(bfh(x))
+                addr = bitcoin.public_key_to_p2pkh(bfh(x))
             else:
                 addr = 'SCRIPT ' + bh2u(x)
             o.append((addr,v))      # consider using yield (addr, v)
