@@ -95,12 +95,14 @@ class ExchangeBase(PrintError):
 class CoinID(ExchangeBase):
     def __init__(self, on_quotes, on_history):
         super().__init__(on_quotes, on_history)
+        self.fiats = None
+        self.usd = None
         self.get_fiats()
 
     def get_fiats(self):
         self.fiats = self.get_json('api.fixer.io', '/latest?base=USD')['rates']
-        self.fiats['USD'] = self.get_json('chainz.cryptoid.info', '/rby/api.dws?q=ticker.usd')
-        return self.fiats
+        self.usd = self.get_json('chainz.cryptoid.info', '/rby/api.dws?q=ticker.usd')
+        self.fiats['USD'] = self.usd
 
     def get_rates(self, ccy):
         fiats = self.fiats
