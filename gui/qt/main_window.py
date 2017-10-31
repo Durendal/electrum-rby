@@ -1079,17 +1079,17 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         self.fee_e.editingFinished.connect(self.update_fee)
         self.connect_fields(self, self.amount_e, self.fiat_send_e, self.fee_e)
 
-        self.rbf_checkbox = QCheckBox(_('Replaceable'))
-        msg = [_('If you check this box, your transaction will be marked as non-final,'),
-               _('and you will have the possiblity, while it is unconfirmed, to replace it with a transaction that pays a higher fee.'),
-               _('Note that some merchants do not accept non-final transactions until they are confirmed.')]
-        self.rbf_checkbox.setToolTip('<p>' + ' '.join(msg) + '</p>')
-        self.rbf_checkbox.setVisible(False)
+        #self.rbf_checkbox = QCheckBox(_('Replaceable'))
+        #msg = [_('If you check this box, your transaction will be marked as non-final,'),
+        #       _('and you will have the possiblity, while it is unconfirmed, to replace it with a transaction that pays a higher fee.'),
+        #       _('Note that some merchants do not accept non-final transactions until they are confirmed.')]
+        #self.rbf_checkbox.setToolTip('<p>' + ' '.join(msg) + '</p>')
+        #self.rbf_checkbox.setVisible(False)
 
         grid.addWidget(self.fee_e_label, 5, 0)
         grid.addWidget(self.fee_slider, 5, 1)
         grid.addWidget(self.fee_e, 5, 2)
-        grid.addWidget(self.rbf_checkbox, 5, 3)
+        #grid.addWidget(self.rbf_checkbox, 5, 3)
 
         self.preview_button = EnterButton(_("Preview"), self.do_preview)
         self.preview_button.setToolTip(_('Display the details of your transactions before signing it.'))
@@ -1221,8 +1221,8 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
                     b = False
             elif rbf_policy == 2:
                 b = False
-            self.rbf_checkbox.setVisible(b)
-            self.rbf_checkbox.setChecked(b)
+            #self.rbf_checkbox.setVisible(b)
+            #self.rbf_checkbox.setChecked(b)
 
 
     def from_list_delete(self, item):
@@ -1350,7 +1350,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         amount = tx.output_value() if self.is_max else sum(map(lambda x:x[2], outputs))
         fee = tx.get_fee()
 
-        use_rbf = self.rbf_checkbox.isChecked()
+        use_rbf = False #self.rbf_checkbox.isChecked()
         if use_rbf:
             tx.set_rbf(True)
 
@@ -1557,7 +1557,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
             e.setText('')
             e.setFrozen(False)
         self.set_pay_from([])
-        self.rbf_checkbox.setChecked(False)
+        #self.rbf_checkbox.setChecked(False)
         self.update_status()
         run_hook('do_clear', self)
 
@@ -2458,30 +2458,16 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         def on_dynfee(x):
             self.config.set_key('dynamic_fees', x == Qt.Checked)
             self.fee_slider.update()
-        dynfee_cb = QCheckBox(_('Use dynamic fees'))
-        dynfee_cb.setChecked(self.config.is_dynfee())
-        dynfee_cb.setToolTip(_("Use fees recommended by the server."))
-        fee_widgets.append((dynfee_cb, None))
-        dynfee_cb.stateChanged.connect(on_dynfee)
 
-        feebox_cb = QCheckBox(_('Edit fees manually'))
-        feebox_cb.setChecked(self.config.get('show_fee', False))
-        feebox_cb.setToolTip(_("Show fee edit box in send tab."))
         def on_feebox(x):
             self.config.set_key('show_fee', x == Qt.Checked)
             self.fee_e.setVisible(bool(x))
-        feebox_cb.stateChanged.connect(on_feebox)
-        fee_widgets.append((feebox_cb, None))
 
         rbf_policy = self.config.get('rbf_policy', 2)
-        rbf_label = HelpLabel(_('Propose Replace-By-Fee') + ':', '')
-        rbf_combo = QComboBox()
-        rbf_combo.addItems([_('Always'), _('If the fee is low'), _('Never')])
-        rbf_combo.setCurrentIndex(rbf_policy)
+
         def on_rbf(x):
             self.config.set_key('rbf_policy', x)
-        rbf_combo.currentIndexChanged.connect(on_rbf)
-        fee_widgets.append((rbf_label, rbf_combo))
+
 
         self.fee_unit = self.config.get('fee_unit', 0)
         fee_unit_label = HelpLabel(_('Fee Unit') + ':', '')
@@ -2672,8 +2658,6 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         def update_currencies():
             if not self.fx: return
             currencies = sorted(self.fx.get_currencies(self.fx.get_history_config()))
-            sys.stdout.write('[DEBUGGING]' + ','.join(currencies) + '\n')
-            sys.stdout.flush()
             ccy_combo.clear()
             ccy_combo.addItems([_('None')] + currencies)
             if self.fx.is_enabled():
