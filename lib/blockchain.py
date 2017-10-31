@@ -112,6 +112,7 @@ class Blockchain(util.PrintError):
         self.checkpoint = checkpoint
         self.parent_id = parent_id
         self.lock = threading.Lock()
+        self.locak_height = 0
         with self.lock:
             self.update_size()
 
