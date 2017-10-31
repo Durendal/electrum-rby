@@ -69,7 +69,7 @@ class ExchangeBase(PrintError):
         try:
             self.print_error("requesting fx history for", ccy)
             self.history[ccy] = self.historical_rates(ccy)
-            self.print_error("received fx history for", ccy, "rate:", self.history[ccy])
+            self.print_error("received fx history")
             self.on_history()
         except BaseException as e:
             self.print_error("failed fx history:", e)
