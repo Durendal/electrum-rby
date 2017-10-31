@@ -24,6 +24,7 @@
 import time
 import queue
 import os
+import stat
 import errno
 import sys
 import random
