@@ -572,7 +572,7 @@ class Commands:
             PR_PAID: 'Paid',
             PR_EXPIRED: 'Expired',
         }
-        out['amount (LTC)'] = format_satoshis(out.get('amount'))
+        out['amount (RBY)'] = format_satoshis(out.get('amount'))
         out['status'] = pr_str[out.get('status', PR_UNKNOWN)]
         return out
 
@@ -693,8 +693,8 @@ param_descriptions = {
     'pubkey': 'Public key',
     'message': 'Clear text message. Use quotes if it contains spaces.',
     'encrypted': 'Encrypted message',
-    'amount': 'Amount to be sent (in LTC). Type \'!\' to send the maximum available.',
-    'requested_amount': 'Requested amount (in LTC).',
+    'amount': 'Amount to be sent (in RBY). Type \'!\' to send the maximum available.',
+    'requested_amount': 'Requested amount (in RBY).',
     'outputs': 'list of ["address", amount]',
     'redeem_script': 'redeem script (hexadecimal)',
 }
@@ -711,7 +711,7 @@ command_options = {
     'labels':      ("-l", "Show the labels of listed addresses"),
     'nocheck':     (None, "Do not verify aliases"),
     'imax':        (None, "Maximum number of inputs"),
-    'fee':         ("-f", "Transaction fee (in LTC)"),
+    'fee':         ("-f", "Transaction fee (in RBY)"),
     'from_addr':   ("-F", "Source address. If it isn't in the wallet, it will ask for the private key unless supplied in the format public_key:private_key. It's not saved in the wallet."),
     'change_addr': ("-c", "Change address. Default is a spare address, or the source address if it's not in the wallet"),
     'nbits':       (None, "Number of bits of entropy"),

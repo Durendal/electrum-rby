@@ -337,9 +337,9 @@ def user_dir():
     elif os.name == 'posix':
         return os.path.join(os.environ["HOME"], ".electrum-rby")
     elif "APPDATA" in os.environ:
-        return os.path.join(os.environ["APPDATA"], "Electrum-LTC")
+        return os.path.join(os.environ["APPDATA"], "Electrum-RBY")
     elif "LOCALAPPDATA" in os.environ:
-        return os.path.join(os.environ["LOCALAPPDATA"], "Electrum-LTC")
+        return os.path.join(os.environ["LOCALAPPDATA"], "Electrum-RBY")
     else:
         #raise Exception("No home directory found in environment variables.")
         return
@@ -477,7 +477,7 @@ def parse_URI(uri, on_pr=None):
         return {'address': uri}
 
     u = urllib.parse.urlparse(uri)
-    if u.scheme != 'litecoin':
+    if u.scheme != 'rubycoin':
         raise BaseException("Not a rubycoin URI")
     address = u.path
 
@@ -545,7 +545,7 @@ def create_URI(addr, amount, message):
         query.append('amount=%s'%format_satoshis_plain(amount))
     if message:
         query.append('message=%s'%urllib.parse.quote(message))
-    p = urllib.parse.ParseResult(scheme='litecoin', netloc='', path=addr, params='', query='&'.join(query), fragment='')
+    p = urllib.parse.ParseResult(scheme='rubycoin', netloc='', path=addr, params='', query='&'.join(query), fragment='')
     return urllib.parse.urlunparse(p)
 
 

@@ -7,7 +7,7 @@ from electrum_rby.util import json_encode, print_msg
 try:
     addr = sys.argv[1]
 except Exception:
-    print("usage: get_history <litecoin_address>")
+    print("usage: get_history <rubycoin_address>")
     sys.exit(1)
 
 n = Network()
