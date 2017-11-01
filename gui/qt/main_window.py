@@ -2660,7 +2660,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
             currencies = sorted(self.fx.get_currencies(self.fx.get_history_config()))
             ccy_combo.clear()
             currencies.pop(currencies.index("USD"))
-            ccy_combo.addItems([_('None'), ('USD')] + currencies)
+            ccy_combo.addItems([('USD')] + currencies)
             if self.fx.is_enabled():
                 ccy_combo.setCurrentIndex(ccy_combo.findText(self.fx.get_currency()))
 
