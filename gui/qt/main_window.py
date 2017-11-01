@@ -2661,7 +2661,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
             ccy_combo.clear()
 
             # Merica fuck yea! comin again to save the mother fuckin day!
-            # Move USD to the top of the list as it is the most likely fiat_address_checkbox
+            # Move USD to the top of the list as it is the most likely fiat
             # to be used.
             currencies.pop(currencies.index("USD"))
             currencies = [('USD')] + currencies
