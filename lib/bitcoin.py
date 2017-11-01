@@ -72,19 +72,7 @@ DEFAULT_SERVERS =     {
 
 
 def set_testnet():
-    global ADDRTYPE_P2PKH, ADDRTYPE_P2SH, ADDRTYPE_P2SH_ALT
-    global TESTNET, HEADERS_URL
-    global GENESIS
-    global DEFAULT_PORTS, SERVERLIST, DEFAULT_SERVERS
-    TESTNET = True
-    ADDRTYPE_P2PKH = 111
-    ADDRTYPE_P2SH = 58
-    ADDRTYPE_P2SH_ALT = 196
-    HEADERS_URL = "https://electrum-ltc.org/testnet_headers"
-    GENESIS = "4966625a4b2851d9fdee139e56211a0d88575f59ed816ff5e6a63deb4e3e29a0"
-    SERVERLIST = 'servers_testnet.json'
-    DEFAULT_PORTS = {'t':'51001', 's':'51002'}
-    DEFAULT_SERVERS = read_json_dict('servers_testnet.json')
+    pass
 
 
 ################################## transactions
