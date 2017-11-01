@@ -2659,6 +2659,10 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
             if not self.fx: return
             currencies = sorted(self.fx.get_currencies(self.fx.get_history_config()))
             ccy_combo.clear()
+
+            # Merica fuck yea! comin again to save the mother fuckin day!
+            # Move USD to the top of the list as it is the most likely fiat_address_checkbox
+            # to be used.
             currencies.pop(currencies.index("USD"))
             currencies = [('USD')] + currencies
             ccy_combo.addItems([_("None")] + currencies)
