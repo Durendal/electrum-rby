@@ -205,19 +205,19 @@ class FxThread(ThreadJob):
                 self.exchange.update(self.ccy)
 
     def is_enabled(self):
-        return bool(self.config.get('use_exchange_rate'))
+        return bool(self.config.get('use_exchange_rate', True))
 
     def set_enabled(self, b):
         return self.config.set_key('use_exchange_rate', bool(b))
 
     def get_history_config(self):
-        return bool(self.config.get('history_rates'))
+        return bool(self.config.get('history_rates', True))
 
     def set_history_config(self, b):
         self.config.set_key('history_rates', bool(b))
 
     def get_fiat_address_config(self):
-        return bool(self.config.get('fiat_address'))
+        return bool(self.config.get('fiat_address', True))
 
     def set_fiat_address_config(self, b):
         self.config.set_key('fiat_address', bool(b))
