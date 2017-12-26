@@ -50,8 +50,9 @@ from .version import ELECTRUM_VERSION, PROTOCOL_VERSION
 DEFAULT_PORTS = {'t':'5018', 's':'5019'}
 
 DEFAULT_SERVERS = {
-    'rby-cce-1.coinomi.net': DEFAULT_PORTS,
-    'rby-cce-2.coinomi.net': DEFAULT_PORTS
+    #'rby-cce-1.coinomi.net': DEFAULT_PORTS,
+    #'rby-cce-2.coinomi.net': DEFAULT_PORTS
+    '192.168.1.103': {'t': '50011', 's': '50011'}
 }
 
 def set_testnet():
@@ -536,7 +537,7 @@ class Network(util.DaemonThread):
         elif method == 'blockchain.relayfee':
             if error is None:
                 #self.relay_fee = int(result * COIN)
-                self.relay_fee = 5000
+                self.relay_fee = 1000
                 self.print_error("relayfee", self.relay_fee)
         elif method == 'blockchain.block.get_chunk':
             self.on_get_chunk(interface, response)
@@ -618,6 +619,7 @@ class Network(util.DaemonThread):
                     if callback not in l:
                         l.append(callback)
                     self.subscriptions[k] = l
+                    
                     # check cached response for subscriptions
                     r = self.sub_cache.get(k)
                 if r is not None:
@@ -625,7 +627,7 @@ class Network(util.DaemonThread):
                     callback(r)
                 else:
                     message_id = self.queue_request(method, params)
-                    self.print_error("Queueing method", method, " request with params:", params, " ID:", message_id)
+                    self.print_error("Queueing method", method, "request with params:", params, " ID:", message_id)
                     self.unanswered_requests[message_id] = method, params, callback
 
     def unsubscribe(self, callback):

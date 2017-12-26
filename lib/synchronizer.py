@@ -89,6 +89,7 @@ class Synchronizer(ThreadJob):
         return bh2u(hashlib.sha256(status.encode('ascii')).digest())
 
     def on_address_status(self, response):
+
         params, result = self.parse_response(response)
         if not params:
             return
