@@ -38,7 +38,8 @@ if sys.platform == 'darwin':
                                  packages=['lib', 'gui', 'plugins'],
                                  iconfile='electrum.icns',
                                  plist=plist,
-                                 resources=['icons', 'cacert.pem'])),
+                                 #resources=['icons', 'cacert.pem'])),
+                                 resources=['icons'])),
     )
 elif sys.platform == 'win32':
     extra_options = dict(
@@ -82,8 +83,8 @@ if sys.platform == 'darwin':
     else:
         print("Found your qib: " + qt_menu_location)
 
-    # Need to include a copy of qt_menu.nib
-    shutil.copytree(qt_menu_location, resource + "qt_menu.nib")
+        # Need to include a copy of qt_menu.nib
+        shutil.copytree(qt_menu_location, resource + "qt_menu.nib")
     # Need to touch qt.conf to avoid loading 2 sets of Qt libraries
     fname = resource + "qt.conf"
     os.utime(fname, None)
