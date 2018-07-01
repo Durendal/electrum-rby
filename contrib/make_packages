@@ -5,13 +5,13 @@ whereis pip3
 if [ $? -ne 0 ] ; then echo "Install pip3" ; exit ; fi
 
 #Install pure python modules in electrum directory
-pip3 install pyaes -t ./packages
-pip3 install ecdsa -t ./packages
-pip3 install pbkdf2 -t ./packages
-pip3 install requests -t ./packages
-pip3 install qrcode -t ./packages
-pip3 install protobuf -t ./packages
-pip3 install dnspython -t ./packages
-pip3 install jsonrpclib-pelix -t ./packages
-pip3 install PySocks -t ./packages
+pip3 install --upgrade pyaes -t ./packages
+pip3 install --upgrade ecdsa -t ./packages
+pip3 install --upgrade pbkdf2 -t ./packages
+pip3 install --upgrade requests -t ./packages
+pip3 install --upgrade qrcode -t ./packages
+pip3 install --upgrade protobuf -t ./packages
+pip3 install --upgrade dnspython -t ./packages
+pip3 install --upgrade jsonrpclib-pelix -t ./packages
+pip3 install --upgrade PySocks -t ./packages
 
